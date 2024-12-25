@@ -1,0 +1,232 @@
+$(function(){
+
+
+
+
+
+    /* @custom validation method (smartCaptcha) 
+
+    ------------------------------------------------------------------ */	
+
+    $.validator.methods.smartCaptcha = function(value, element, param) {
+
+        return value == param;
+
+    };
+
+  
+
+   $(".errorsContainer").hide();    
+
+    $( "#smart-form" ).validate({
+
+    
+
+        /* @validation states + elements 
+
+        ------------------------------------------- */
+
+        
+
+        errorClass: "state-error",
+
+        validClass: "state-success",
+
+        errorElement: "li",
+
+        
+
+        /* @validation rules 
+
+        ------------------------------------------ */
+
+          
+
+        rules: {
+
+          leistung: {
+
+                required: true
+
+            },	
+
+            qm: {
+
+              required: false
+
+            },
+
+            name: {
+
+                required: true,
+
+minlength: 5
+
+            },			
+
+            email: {
+
+                required: true,
+
+                email: true
+
+            },
+
+            mobile: {
+
+              required: true,
+
+   number: true,
+
+minlength: 5
+
+            },
+
+                    adresse: {
+
+              required: true
+
+            },	
+
+	        comment: {
+
+              required: true,
+
+minlength: 10
+
+            },	
+
+
+
+																				
+
+        	generalTerms:{
+
+						required: true
+
+		}		
+
+        },
+
+        
+
+        /* @validation error messages 
+
+        ---------------------------------------------- */
+
+          
+
+        messages:{
+
+          leistung: {
+
+                required: 'Bitte Leistung auswählen'
+
+            },
+
+            name: {
+
+                required: 'Bitte Namen eingeben',
+
+minlength: 'Bitte geben Sie mindestens 5 Zeichen im Namen ein'
+
+            },		
+
+            adresse: {
+
+                required: 'Bitte Adresse angeben'
+
+            },				
+
+            email: {
+
+                required: 'Bitte E-Mail Adresse eingeben',
+
+                email: 'Bitte gültige E-Mail Adresse eingeben'
+
+            },
+
+  	comment: {
+
+                required: 'Bitte Nachricht eingeben', minlength: "Bitte mehr als 10 Zeichen eingeben"            },
+
+
+
+            mobile:  {
+
+                required: 'Bitte Telefonnummer eingeben',
+
+                number: 'Bitte nur Zahlen eingeben',
+
+minlength: 'Bitte geben Sie mindestens 5 Zahlen bei der Telefonnummer an'
+
+            },
+
+				generalTerms:{
+
+						required: 'Bitte Datenschutzerklärung zustimmen'
+
+					}		
+
+						
+
+         
+
+        },
+
+
+
+        /* @validation highlighting + error placement  
+
+        ---------------------------------------------------- */	
+
+        
+
+        invalidHandler: function(form, validator) {
+
+          $(".errorsContainer").show();
+
+        },						
+
+        highlight: function(element, errorClass, validClass) {
+
+          $(element).closest('.smart-forms').addClass(errorClass);
+
+          if (this.numberOfInvalids() > 0) {
+
+            $(".errorsContainer").show();
+
+          }							
+
+        },
+
+        unhighlight: function(element, errorClass, validClass) {
+
+          $(element).closest('.smart-forms').removeClass(errorClass).addClass(validClass);
+
+          if (this.numberOfInvalids() == 0) {
+
+            $(".errorsContainer").hide();
+
+          }							
+
+        },					
+
+        errorPlacement: function(error, element) {
+
+          error.appendTo("#smartErrors");
+
+        }	 
+
+			});	
+
+
+
+ 
+  
+
+});
+
+    
+
+     
